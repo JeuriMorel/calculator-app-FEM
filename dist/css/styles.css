@@ -11,150 +11,6 @@
 /* Text */
 /* Keys */
 /* Backgrounds */
-.container {
-  margin: auto;
-  width: clamp(335px, 90vw, 550px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.container .top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  margin-top: 25px;
-}
-
-.container .top .themeSlider {
-  position: relative;
-  display: flex;
-  gap: 25px;
-  font-size: 10px;
-}
-
-.container .top .themeSlider p {
-  align-self: flex-end;
-  position: relative;
-  top: 5px;
-}
-
-.container .top .themeSlider::after {
-  content: '';
-  position: absolute;
-  width: 78px;
-  height: 25px;
-  border-radius: 20px;
-  background-color: #232c43;
-  right: 0;
-  bottom: -10px;
-  pointer-events: none;
-}
-
-.container .top .themeSlider form {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 3px;
-}
-
-.container .top .themeSlider form label, .container .top .themeSlider form input {
-  display: inline-block;
-  flex: 1 0 26%;
-  outline: none;
-}
-
-.container .top .themeSlider form input:checked {
-  position: relative;
-}
-
-.container .top .themeSlider form input:checked::after {
-  content: '';
-  position: absolute;
-  top: 18%;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #d03f2f;
-  z-index: 2;
-}
-
-.container .screen {
-  width: 100%;
-  height: 90px;
-  margin-top: 25px;
-  border-radius: 10px;
-  background-color: #182034;
-  color: white;
-  padding: 30px 30px 35px;
-  text-align: end;
-}
-
-.container .keys {
-  width: 100%;
-  height: 420px;
-  padding: 25px;
-  margin-top: 25px;
-  border-radius: 10px;
-  background-color: #232c43;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.container .keys__key {
-  width: 85%;
-  height: 60px;
-  border-radius: 5px;
-  font-size: 20px;
-  background-color: #eae3dc;
-  color: #444b5a;
-  text-align: center;
-  line-height: 60px;
-  box-shadow: 0 4px 0 0 #b4a597;
-  cursor: pointer;
-}
-
-.container .keys__key:active {
-  position: relative;
-  top: 4px;
-  box-shadow: 0 0 0 0;
-}
-
-.container .keys .del, .container .keys .reset {
-  color: white;
-  background-color: #637097;
-  box-shadow: 0 4px 0 0 #404e72;
-}
-
-.container .keys .del:active, .container .keys .reset:active {
-  position: relative;
-  top: 4px;
-  box-shadow: 0 0 0 0;
-}
-
-.container .keys .reset {
-  width: 93%;
-  grid-column: 1/3;
-}
-
-.container .keys .equal {
-  width: 93%;
-  grid-column: 3/5;
-  color: white;
-  background-color: #d03f2f;
-  box-shadow: 0 4px 0 0 #93261a;
-}
-
-.container .keys .equal:active {
-  position: relative;
-  top: 4px;
-  box-shadow: 0 0 0 0;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -251,6 +107,174 @@ body.themeThree #container .keys .equal {
   color: #1b2428;
   background-color: #00e0d1;
   box-shadow: 0 4px 0 0 #6cf9f2;
+}
+
+.container {
+  margin: auto;
+  width: clamp(335px, 90vw, 540px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-top: 25px;
+}
+
+.container .top .themeSlider {
+  position: relative;
+  display: flex;
+  gap: 25px;
+  font-size: 10px;
+}
+
+.container .top .themeSlider p {
+  align-self: flex-end;
+  position: relative;
+  top: 5px;
+}
+
+.container .top .themeSlider::after {
+  content: '';
+  position: absolute;
+  width: 76px;
+  height: 25px;
+  border-radius: 20px;
+  background-color: #232c43;
+  right: 0;
+  bottom: -10px;
+  pointer-events: none;
+}
+
+.container .top .themeSlider form {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 3px;
+}
+
+.container .top .themeSlider form label, .container .top .themeSlider form input {
+  display: inline-block;
+  flex: 1 0 26%;
+  outline: none;
+}
+
+.container .top .themeSlider form input:checked {
+  position: relative;
+}
+
+.container .top .themeSlider form input:checked::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #d03f2f;
+  z-index: 2;
+}
+
+.container .screen {
+  width: 100%;
+  min-height: 90px;
+  margin-top: 25px;
+  border-radius: 10px;
+  background-color: #182034;
+  color: white;
+  padding: 10px 30px 15px;
+  text-align: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.container .screen__top {
+  font-size: 12px;
+  padding-right: 5px;
+}
+
+.container .keys {
+  width: 100%;
+  min-height: 420px;
+  padding: 25px;
+  margin-top: 25px;
+  border-radius: 10px;
+  background-color: #232c43;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.container .keys__key {
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  font-size: 20px;
+  background-color: #eae3dc;
+  color: #444b5a;
+  text-align: center;
+  line-height: 65px;
+  box-shadow: 0 4px 0 0 #b4a597;
+  cursor: pointer;
+}
+
+.container .keys__key:active {
+  position: relative;
+  top: 4px;
+  box-shadow: 0 0 0 0;
+}
+
+@media screen and (min-width: 600px) {
+  .container .keys .keys__key:not(.del):not(.reset):not(.equal) {
+    font-size: 30px;
+  }
+  .container .keys .keys__key {
+    border-radius: 10px;
+  }
+}
+
+.container .keys .del, .container .keys .reset {
+  color: white;
+  background-color: #637097;
+  box-shadow: 0 4px 0 0 #404e72;
+}
+
+.container .keys .del:active, .container .keys .reset:active {
+  position: relative;
+  top: 4px;
+  box-shadow: 0 0 0 0;
+}
+
+.container .keys .reset {
+  grid-column: 1/3;
+}
+
+.container .keys .equal {
+  grid-column: 3/5;
+  color: white;
+  background-color: #d03f2f;
+  box-shadow: 0 4px 0 0 #93261a;
+}
+
+.container .keys .equal:active {
+  position: relative;
+  top: 4px;
+  box-shadow: 0 0 0 0;
+}
+
+@media screen and (min-width: 600px) {
+  .container .keys {
+    gap: 25px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
