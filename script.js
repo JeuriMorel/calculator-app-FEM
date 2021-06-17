@@ -8,6 +8,7 @@ const del = document.querySelector("#del");
 const equal = document.querySelector(".equal");
 const topDisplay = document.querySelector(".screen__top");
 const bottomDisplay = document.querySelector(".screen__bottom");
+let resetWithNextPress = false
 
 const getBottomDisplayNumber = () => {
   return bottomDisplay.textContent.toString();
@@ -16,9 +17,9 @@ const getTopDisplayNumber = () => {
   return topDisplay.textContent.toString();
 };
 
+//Remove lefthand zero from integer
 const checkForZero = () => {
   let bottomDisplayNumber = getBottomDisplayNumber();
-
   if (
     bottomDisplayNumber.charAt(0) === "0" &&
     bottomDisplayNumber.charAt(1) !== "."
@@ -28,69 +29,98 @@ const checkForZero = () => {
   }
 };
 
+const checkForReset = () => {
+  if (resetWithNextPress) {
+    handleReset();
+    resetWithNextPress = false;
+  }
+}
+
+const addCommas = (number) => {
+  let integerNum = parseFloat(number.split(".")[0].replace(/,/g, ''));
+  let decimalNum = number.split(".")[1];
+  let withCommas = integerNum ? integerNum.toLocaleString("en-US") : '0';
+  return decimalNum != null
+    ? `${withCommas}.${decimalNum}`
+    : `${withCommas}`;
+}
+
 const handleThemeChange = (e) => {
   body.className = e.target.id;
 };
 
 
-
+//When operator is pressed
 const performOperation = (e) => {
+  checkForReset();
   let operation = e.target.id.toString();
   let topNumber = getTopDisplayNumber()
-  if ( topNumber === '') {
-    topDisplay.textContent = getBottomDisplayNumber() + ' ' + operation;
-    bottomDisplay.textContent = '0'
+
+  //Start a negative number
+  if (operation === "-" && (bottomDisplay.textContent === '0' || bottomDisplay.textContent === '')) {
+    bottomDisplay.textContent = '-'
     return
   }
+    if (topNumber === "") {
+      topDisplay.textContent =
+        parseFloat(getBottomDisplayNumber().replace(/,/g, "")).toLocaleString(
+          "en-US"
+        ) +
+        " " +
+        operation;
+      bottomDisplay.textContent = "0";
+      return;
+    }
   let splitTop = topNumber.split(' ');
-
   if (splitTop[1]) {
-    handleOperation(splitTop[0], splitTop[1], operation);
+    topDisplay.textContent = handleOperation(
+      parseFloat(splitTop[0].replace(/,/g, "")).toLocaleString("en-US"),
+      splitTop[1],
+      operation
+    );
+    bottomDisplay.textContent = "0";
   }
 };
 
 const handleNumberPress = (e) => {
+  checkForReset();
+  let buttonPress = (e.target.id).toString()
   let bottomDisplayNumber = getBottomDisplayNumber();
-
-  if (e.target.id === "." && bottomDisplayNumber.includes(".")) return;
-
-  bottomDisplay.textContent = bottomDisplayNumber + e.target.id.toString();
+  if (buttonPress === "." && bottomDisplayNumber.includes(".")) return;
+  bottomDisplay.textContent = !bottomDisplayNumber ? buttonPress :  addCommas(`${bottomDisplayNumber}${buttonPress}`)
   checkForZero();
 };
 
 const handleOperation = (number, operator, operation = '') => {
-  
   switch (operator) {
-    case "+":
-      topDisplay.textContent =
-        parseFloat(number) +
-        parseFloat(getBottomDisplayNumber()) +
-        " " +
-        operation;
-      bottomDisplay.textContent = "0";
-      break;
-    case "-":
-      topDisplay.textContent =
-        parseFloat(number) -
-        parseFloat(getBottomDisplayNumber()) +
-        " " +
-        operation;
-      bottomDisplay.textContent = "0";
-      break;
-    case "/":
-      topDisplay.textContent =
-        parseFloat(number) / parseFloat(getBottomDisplayNumber()) +
-        " " +
-        operation;
-      bottomDisplay.textContent = "0";
-      break;
-    case "*":
-      topDisplay.textContent =
-        parseFloat(number) * parseFloat(getBottomDisplayNumber()) +
-        " " +
-        operation;
-      bottomDisplay.textContent = "0";
-      break;
+    case "+": return (
+      (
+        parseFloat(number.replace(/,/g, "")) + parseFloat(getBottomDisplayNumber())
+      ).toLocaleString("en-US") +
+      " " +
+      operation
+    );
+    case "-": return (topDisplay.textContent =
+      (
+        parseFloat(number.replace(/,/g, "")) -
+        parseFloat(getBottomDisplayNumber())
+      ).toLocaleString("en-US") +
+      " " +
+      operation);
+    case "/": return (topDisplay.textContent =
+      (
+        parseFloat(number.replace(/,/g, "")) /
+        parseFloat(getBottomDisplayNumber())
+      ).toLocaleString("en-US") +
+      " " +
+      operation);
+    case "*": return (topDisplay.textContent =
+      (
+        parseFloat(number.replace(/,/g, "")) *
+        parseFloat(getBottomDisplayNumber())
+      ).toLocaleString("en-US") +
+      " " +
+      operation);
     default:
       return;
   }
@@ -98,20 +128,25 @@ const handleOperation = (number, operator, operation = '') => {
 
 const handleDelete = () => {
   let number = getBottomDisplayNumber();
-  bottomDisplay.textContent = number.substring(0, number.length - 1);
+  bottomDisplay.textContent = addCommas(number.substring(0, number.length - 1));
 };
+
+//Clear Display
 const handleReset = () => {
   topDisplay.textContent = "";
   bottomDisplay.textContent = "0";
 };
+
+//Perform operation when Equal sign is pressed
 const handleEqual = () => {
+  //Separate number and operator
   let splitTop = getTopDisplayNumber().split(" ");
-  handleOperation(splitTop[0], splitTop[1]);
-  bottomDisplay.textContent = topDisplay.textContent;
+  bottomDisplay.textContent = addCommas(handleOperation(splitTop[0], splitTop[1])) || addCommas(bottomDisplay.textContent);
   topDisplay.textContent = ''
+  resetWithNextPress = true
 };
 
-//Onload
+//On load check for theme preference
 window.onload = () => {
   if (theme === `"dark"`) {
     body.className = "themeThree";
