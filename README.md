@@ -16,7 +16,7 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 
 ### The challenge
 
-![Design preview for the Calculator app coding challenge](./design/desktop-preview.jpg)
+![Design preview for the Calculator app coding challenge](./images/desktop-preview.jpg)
 
 Users should be able to:
 
@@ -44,4 +44,3 @@ Users should be able to:
 ## Author
 
 - Frontend Mentor - [@JeuriMorel](https://www.frontendmentor.io/profile/JeuriMorel)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
