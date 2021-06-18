@@ -95,7 +95,8 @@ const handleOperation = (number, operator, operation = '') => {
   switch (operator) {
     case "+": return (
       (
-        parseFloat(number.replace(/,/g, "")) + parseFloat(getBottomDisplayNumber())
+        parseFloat(number.replace(/,/g, "")) +
+        parseFloat(getBottomDisplayNumber().replace(/,/g, ""))
       ).toLocaleString("en-US") +
       " " +
       operation
@@ -103,21 +104,21 @@ const handleOperation = (number, operator, operation = '') => {
     case "-": return (topDisplay.textContent =
       (
         parseFloat(number.replace(/,/g, "")) -
-        parseFloat(getBottomDisplayNumber())
+        parseFloat(getBottomDisplayNumber().replace(/,/g, ""))
       ).toLocaleString("en-US") +
       " " +
       operation);
     case "/": return (topDisplay.textContent =
       (
         parseFloat(number.replace(/,/g, "")) /
-        parseFloat(getBottomDisplayNumber())
+        parseFloat(getBottomDisplayNumber().replace(/,/g, ""))
       ).toLocaleString("en-US") +
       " " +
       operation);
     case "*": return (topDisplay.textContent =
       (
         parseFloat(number.replace(/,/g, "")) *
-        parseFloat(getBottomDisplayNumber())
+        parseFloat(getBottomDisplayNumber().replace(/,/g, ""))
       ).toLocaleString("en-US") +
       " " +
       operation);
